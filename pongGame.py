@@ -5,12 +5,17 @@ import os
 
 
 WIDTH = 1100
-HEIGHT = 750
-backgroundColor = (34, 37, 44)
-padelColor = (255, 255, 255)
-ballColor = (255, 255, 255)
-white = (255, 255, 255)
-timeColor = (250, 135, 241)
+HEIGHT = 800
+# backgroundColor = (34, 37, 44)
+# padelColor = (255, 255, 255)
+# ballColor = (255, 255, 255)
+# white = (255, 255, 255)
+# timeColor = (250, 135, 241)
+
+backgroundColor = "#282a36"
+padelColor = "#f8f8f2"
+ballColor = "#ff79c6"
+timeColor = "#bd93f9"
 FPS = 60
 
 
@@ -22,9 +27,10 @@ class PongGame:
         self.padel_speed_right = 0
         self.scoreL = 0
         self.scoreR = 0
-        self.speed = 15
-        self.leftP = pygame.Rect(2, HEIGHT / 2, 15, 140)
-        self.rightP = pygame.Rect(WIDTH - 18, HEIGHT / 2, 15, 140)
+        self.speed = 15 # change this for padel speed
+        self.padel_width = 12 # change this for padel width
+        self.leftP = pygame.Rect(3, HEIGHT / 2, self.padel_width, 140) # x, y, width, height
+        self.rightP = pygame.Rect(WIDTH - self.padel_width + 3, HEIGHT / 2, self.padel_width, 140) 
         self.ball = pygame.Rect(WIDTH / 2 - 8, HEIGHT / 2 - 8, 16, 16)
         self.score_time = True
 
@@ -86,16 +92,16 @@ class PongGame:
 
     def text_surf(self):
         # score of leftPlayer
-        score_surf = game_font.render(str(self.scoreL), True, white)
+        score_surf = game_font.render(str(self.scoreL), True, padelColor)
         score_rect = score_surf.get_rect(center=((WIDTH/2)/2, 70))
         screen.blit(score_surf, score_rect)
         # score of rightPlayer
-        score_surf = game_font.render(str(self.scoreR), True, white)
+        score_surf = game_font.render(str(self.scoreR), True, padelColor)
         score_rect = score_surf.get_rect(center=(((WIDTH/2)/2)+(WIDTH/2), 70))
         screen.blit(score_surf, score_rect)
 
     def draw_obj(self):
-        self.rightP.x = WIDTH - 18 # for perfect placement when screen in resized.
+        self.rightP.x = WIDTH - self.padel_width + 3 # for perfect placement when screen in resized.
         pygame.draw.rect(screen, padelColor, self.leftP)
         pygame.draw.rect(screen, padelColor, self.rightP)
         pygame.draw.ellipse(screen, ballColor, self.ball, 1)
