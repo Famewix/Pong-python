@@ -6,17 +6,17 @@ import os
 
 WIDTH = 1100
 HEIGHT = 800
-# backgroundColor = (34, 37, 44)
-# padelColor = (255, 255, 255)
-# ballColor = (255, 255, 255)
-# white = (255, 255, 255)
-# timeColor = (250, 135, 241)
 
-backgroundColor = "#282a36"
-padelColor = "#f8f8f2"
-ballColor = "#ff79c6"
-timeColor = "#bd93f9"
+backgroundColor = "#000000"
+padelColor = "#ff8629"
+ballColor = "#7bff00"
+timeColor = "#ffab6b"
 FPS = 60
+# backgroundColor = "#282a36"
+# padelColor = "#f8f8f2"
+# ballColor = "#ff79c6"
+# timeColor = "#bd93f9"
+# FPS = 60
 
 
 class PongGame:
@@ -30,8 +30,8 @@ class PongGame:
         self.speed = 15 # change this for padel speed
         self.padel_width = 12 # change this for padel width
         self.leftP = pygame.Rect(3, HEIGHT / 2, self.padel_width, 140) # x, y, width, height
-        self.rightP = pygame.Rect(WIDTH - self.padel_width + 3, HEIGHT / 2, self.padel_width, 140) 
-        self.ball = pygame.Rect(WIDTH / 2 - 8, HEIGHT / 2 - 8, 16, 16)
+        self.rightP = pygame.Rect((WIDTH - self.padel_width) - 3, HEIGHT / 2, self.padel_width, 140)
+        self.ball = pygame.Rect(WIDTH / 2 - 8, HEIGHT / 2 - 8, 18, 18)
         self.score_time = True
 
     def score(self):
@@ -101,10 +101,10 @@ class PongGame:
         screen.blit(score_surf, score_rect)
 
     def draw_obj(self):
-        self.rightP.x = WIDTH - self.padel_width + 3 # for perfect placement when screen in resized.
+        self.rightP.x = WIDTH - self.padel_width - 3 # for perfect placement when screen in resized.
         pygame.draw.rect(screen, padelColor, self.leftP)
         pygame.draw.rect(screen, padelColor, self.rightP)
-        pygame.draw.ellipse(screen, ballColor, self.ball, 1)
+        pygame.draw.ellipse(screen, ballColor, self.ball)
 
     def draw_line(self):
         start_pos = [WIDTH / 2, 0]
